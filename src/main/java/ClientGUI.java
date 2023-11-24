@@ -1,8 +1,10 @@
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.SimpleTimeZone;
-
+import javafx.scene.image.Image;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -50,8 +52,13 @@ public class ClientGUI extends Application{
 	Text sizetext, loser, winorlose;
 
 	ArrayList<TextField> wordd;
+
 	HBox wordspaces;
 	BorderPane playingpane;
+
+	Image background = new Image("background.jpg");
+
+
 
 
 
@@ -75,6 +82,16 @@ public class ClientGUI extends Application{
 		sceneMap.put("PlayingPage", playingGUI());
 		sceneMap.put("WinLosePage", WinLoseGUI());
 
+		String css;
+
+		css = Objects.requireNonNull(this.getClass().getResource("/assets/style.css")).toExternalForm();
+
+		sceneMap.get("LandingPage").getStylesheets().add(css);
+		sceneMap.get("ClientPage").getStylesheets().add(css);
+		sceneMap.get("PlayingPage").getStylesheets().add(css);
+		sceneMap.get("WinLosePage").getStylesheets().add(css);
+
+
 		primaryStage.setScene(sceneMap.get("LandingPage"));
 		primaryStage.show();
 		
@@ -82,18 +99,30 @@ public class ClientGUI extends Application{
 
 	public Scene createPortGui(){
 		BorderPane pane = new BorderPane();
-		portNumber = new TextField("Enter Port Number:");
+		pane.setStyle("-fx-background-image: url('"+background.getUrl()+"');");
+		pane.setStyle("-fx-background-image: url('"+background.getUrl()+"'); -fx-background-repeat: no-repeat; -fx-background-size: cover;");
+		Text title = new Text("Enter a port number");
+		title.getStyleClass().add("port-label");
+		portNumber = new TextField();
+		portNumber.setMaxWidth(150);
+		portNumber.getStyleClass().add("custom-textfield");
 
 		pButton = new Button("Connect");
+		pButton.getStyleClass().add("my-button");
 		portBox = new VBox(150);
+		VBox topBox = new VBox(50);
+
 		listItems = new ListView<String>();
 		listItems2 = new ListView<String>();
 
 		portBox.setAlignment(Pos.CENTER);
-		portBox.getChildren().addAll(portNumber, pButton);
+
+		topBox.setAlignment(Pos.CENTER);
+		topBox.getChildren().addAll(title,portNumber);
+
+		portBox.getChildren().addAll(topBox,pButton);
+
 		pane.setCenter(portBox);
-
-
 
 		pButton.setOnAction(event -> {
 			String portText = portNumber.getText();
@@ -164,12 +193,13 @@ public class ClientGUI extends Application{
 							}
 						}
 						else{
-							sizetext.setText("Size:" + data.toString());
 							wordd = new ArrayList<>();
 							wordspaces=new HBox();
 							System.out.println(data.toString());
 							for (int x = 0; x < Integer.valueOf(data.toString()); x++){
-								wordd.add(new TextField());
+								TextField letters = new TextField();
+								letters.getStyleClass().add("circle-text-field");
+								wordd.add(letters);
 								wordspaces.getChildren().add(wordd.get(x));
 							}
 							playingpane.setBottom(wordspaces);
@@ -182,20 +212,17 @@ public class ClientGUI extends Application{
 				// If successful, proceed to the client view
 				clientConnection.start();
 
-				if (clientConnection.socketClient.isConnected()) {
-					primaryStage.setScene(sceneMap.get("ClientPage"));
-					primaryStage.setTitle("This is a client");
+//				if (clientConnection.socketClient.isConnected()) {
+//					primaryStage.setScene(sceneMap.get("ClientPage"));
+//					primaryStage.setTitle("This is a client");
+//
+//				}
+				primaryStage.setScene(sceneMap.get("ClientPage"));
+				primaryStage.setTitle("This is a client");
 
-				}
 				} catch (Exception e){
 					System.out.println("Connection failed. Please re-enter the port number.");
 			}
-
-//			serverConnection = new Server(data -> {
-//				Platform.runLater(() -> {
-//					size = data.toString();
-//				});
-//			}, portNum);
 
 		});
 
@@ -205,15 +232,21 @@ public class ClientGUI extends Application{
 	
 	public Scene createClientGui() {
 		BorderPane pane = new BorderPane();
+		pane.setStyle("-fx-background-image: url('"+background.getUrl()+"');");
+		pane.setStyle("-fx-background-image: url('"+background.getUrl()+"'); -fx-background-repeat: no-repeat; -fx-background-size: cover;");
 		loser = new Text();
+		loser.getStyleClass().add("fancy-text");
 		Text top = new Text("Choose a category");
-		top.setStyle("-fx-font-size: 20");
+		top.getStyleClass().add("fancy-text");
 		category1 = new Button("Animals");
 		category2 = new Button("Movies");
 		category3 = new Button("Countries");
+		category1.getStyleClass().add("round-button");
+		category2.getStyleClass().add("round-button");
+		category3.getStyleClass().add("round-button");
 		HBox choices = new HBox(20);
 		VBox content = new VBox(100);
-		content.setAlignment(Pos.CENTER);
+		content.setAlignment(Pos.TOP_CENTER);
 		content.getChildren().setAll(top);
 		choices.setAlignment(Pos.CENTER);
 		choices.getChildren().setAll(category1,category2,category3);
@@ -242,24 +275,30 @@ public class ClientGUI extends Application{
 		});
 
 
-		return new Scene(pane, 400, 300);
+		return new Scene(pane, 500, 400);
 		
 	}
 
 	public Scene playingGUI(){
 		playingpane = new BorderPane();
+		playingpane.setStyle("-fx-background-image: url('"+background.getUrl()+"');");
+		playingpane.setStyle("-fx-background-image: url('"+background.getUrl()+"'); -fx-background-repeat: no-repeat; -fx-background-size: cover;");
 		Text title = new Text("Guess the word!");
 		category = new Text("Category: ");
 		guess = new Text("Guesses: " + guesses);
-		Text input = new Text("Enter a character");
+		title.getStyleClass().add("game-text");
+		category.getStyleClass().add("game-text");
+		guess.getStyleClass().add("game-text");
+		Text input = new Text("Enter a character:");
+		input.getStyleClass().add("game-text");
 		TextField inputText = new TextField();
-		Button letterButton = new Button();
-		sizetext = new Text("Size: #");
+		inputText.getStyleClass().add("circle-text-field");
+		Button letterButton = new Button("Enter");
+		letterButton.getStyleClass().add("my-button");
 
 
-		inputBox = new HBox();
+		inputBox = new HBox(15);
 		inputBox.getChildren().setAll(input, inputText, letterButton);
-		playingpane.setCenter(inputBox);
 		inputBox.setAlignment(Pos.CENTER);
 
 		letterButton.setOnAction(event -> {
@@ -271,17 +310,21 @@ public class ClientGUI extends Application{
 
 		VBox content = new VBox(10);
 		content.setAlignment(Pos.TOP_CENTER);
-		content.getChildren().setAll(title,category,guess,sizetext, inputBox);
+		content.getChildren().setAll(title,category,guess, inputBox);
 		playingpane.setCenter(content);
-		return new Scene(playingpane, 400, 300);
+		return new Scene(playingpane, 500, 400);
 	}
-	// Juan is cool
 	public Scene WinLoseGUI(){
 		BorderPane pane = new BorderPane();
+		pane.setStyle("-fx-background-image: url('"+background.getUrl()+"');");
+		pane.setStyle("-fx-background-image: url('"+background.getUrl()+"'); -fx-background-repeat: no-repeat; -fx-background-size: cover;");
 		winorlose = new Text();
+		winorlose.getStyleClass().add("fancy-text");
 		Button restart = new Button("Restart");
 		Button exit = new Button("Quit");
-		HBox buttons = new HBox();
+		exit.getStyleClass().add("my-button");
+		restart.getStyleClass().add("my-button");
+		HBox buttons = new HBox(20);
 		VBox content = new VBox(20);
 		buttons.setAlignment(Pos.CENTER);
 		buttons.getChildren().setAll(restart,exit);
@@ -308,7 +351,7 @@ public class ClientGUI extends Application{
 			System.exit(1);
 		});
 
-		return new Scene(pane,400,300);
+		return new Scene(pane,500,400);
 	}
 
 
