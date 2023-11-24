@@ -67,6 +67,8 @@ public class ClientGUI extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
+
+
 		this.primaryStage = primaryStage;
 		primaryStage.setTitle("Client");
 
@@ -182,8 +184,7 @@ public class ClientGUI extends Application{
 					});
 				}, portNum);
 				// If successful, proceed to the client view
-//				primaryStage.setScene(sceneMap.get("ClientPage"));
-//				primaryStage.setTitle("This is a client");
+
 				clientConnection.start();
 
 				Thread.sleep(25);
@@ -196,32 +197,11 @@ public class ClientGUI extends Application{
 				else{
 
 				}
-//
-//				connectionSuccessful = clientConnection.socketClient.isConnected();
-
-
-
-
 
 			} catch (Exception e){
 					System.out.println("Connection failed. Please re-enter the port number.2");
 
 				}
-
-
-			System.out.println(clientConnection.isConnected());
-//			if (connectionSuccessful) {
-//				// Proceed to the client view if the connection was successful
-//				primaryStage.setScene(sceneMap.get("ClientPage"));
-//				primaryStage.setTitle("This is a client");
-//			} else {
-//				// Handle the scenario if the connection fails (e.g., display an error message)
-//				// You may want to add UI components or handle this situation according to your requirements
-//				System.out.println("Connection failed. Please re-enter the port number.");
-//			}
-
-
-
 		});
 
 		return new Scene(pane, 500, 400);
