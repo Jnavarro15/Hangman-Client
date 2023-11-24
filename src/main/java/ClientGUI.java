@@ -46,7 +46,7 @@ public class ClientGUI extends Application{
 	int cat3counter = 0;
 
 	String currentCategory;
-
+	//kj
 	String size;
 
 	Text sizetext, loser, winorlose;
