@@ -275,7 +275,7 @@ public class ClientGUI extends Application{
 		playingpane.setCenter(content);
 		return new Scene(playingpane, 400, 300);
 	}
-
+	// Juan is cool
 	public Scene WinLoseGUI(){
 		BorderPane pane = new BorderPane();
 		winorlose = new Text();
