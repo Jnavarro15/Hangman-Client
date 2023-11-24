@@ -25,6 +25,8 @@ import javafx.scene.text.Text;
 public class ClientGUI extends Application{
 
 	static int portNum;
+
+//	static boolean connected;
 	TextField portNumber, inputText, c1;
 	Button serverChoice,clientChoice,b1, pButton, category1, category2, category3;
 	HashMap<String, Scene> sceneMap;
@@ -62,8 +64,8 @@ public class ClientGUI extends Application{
 
 
 
-	
-	
+
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		launch(args);
@@ -94,7 +96,7 @@ public class ClientGUI extends Application{
 
 		primaryStage.setScene(sceneMap.get("LandingPage"));
 		primaryStage.show();
-		
+
 	}
 
 	public Scene createPortGui(){
@@ -210,23 +212,42 @@ public class ClientGUI extends Application{
 					});
 				}, portNum);
 				// If successful, proceed to the client view
+
 				clientConnection.start();
 
-//				if (clientConnection.socketClient.isConnected()) {
-//					primaryStage.setScene(sceneMap.get("ClientPage"));
-//					primaryStage.setTitle("This is a client");
-//
-//				}
-				primaryStage.setScene(sceneMap.get("ClientPage"));
-				primaryStage.setTitle("This is a client");
 
-				} catch (Exception e){
-					System.out.println("Connection failed. Please re-enter the port number.");
-			}
+
+
+				Thread.sleep(25);
+				System.out.println(clientConnection.isConnected());
+
+				if (clientConnection.isConnected()){
+					primaryStage.setScene(sceneMap.get("ClientPage"));
+					primaryStage.setTitle("Client");
+				}
+				else{
+
+				}
+
+
+
+
+
+
+			} catch (Exception e){
+					System.out.println("Connection failed. Please re-enter the port number.2");
+
+				}
+
+
+
+
+
 
 		});
 
 		return new Scene(pane, 500, 400);
+
 	}
 
 	
