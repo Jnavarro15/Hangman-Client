@@ -23,6 +23,8 @@ import javafx.scene.text.Text;
 public class ClientGUI extends Application{
 
 	static int portNum;
+
+//	static boolean connected;
 	TextField portNumber, inputText, c1;
 	Button serverChoice,clientChoice,b1, pButton, category1, category2, category3;
 	HashMap<String, Scene> sceneMap;
@@ -55,8 +57,8 @@ public class ClientGUI extends Application{
 
 
 
-	
-	
+
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		launch(args);
@@ -77,7 +79,7 @@ public class ClientGUI extends Application{
 
 		primaryStage.setScene(sceneMap.get("LandingPage"));
 		primaryStage.show();
-		
+
 	}
 
 	public Scene createPortGui(){
@@ -180,26 +182,50 @@ public class ClientGUI extends Application{
 					});
 				}, portNum);
 				// If successful, proceed to the client view
+//				primaryStage.setScene(sceneMap.get("ClientPage"));
+//				primaryStage.setTitle("This is a client");
 				clientConnection.start();
 
-				if (clientConnection.socketClient.isConnected()) {
+				Thread.sleep(25);
+				System.out.println(clientConnection.isConnected());
+
+				if (clientConnection.isConnected()){
 					primaryStage.setScene(sceneMap.get("ClientPage"));
-					primaryStage.setTitle("This is a client");
+					primaryStage.setTitle("Client");
+				}
+				else{
 
 				}
-				} catch (Exception e){
-					System.out.println("Connection failed. Please re-enter the port number.");
-			}
+//
+//				connectionSuccessful = clientConnection.socketClient.isConnected();
 
-//			serverConnection = new Server(data -> {
-//				Platform.runLater(() -> {
-//					size = data.toString();
-//				});
-//			}, portNum);
+
+
+
+
+			} catch (Exception e){
+					System.out.println("Connection failed. Please re-enter the port number.2");
+
+				}
+
+
+			System.out.println(clientConnection.isConnected());
+//			if (connectionSuccessful) {
+//				// Proceed to the client view if the connection was successful
+//				primaryStage.setScene(sceneMap.get("ClientPage"));
+//				primaryStage.setTitle("This is a client");
+//			} else {
+//				// Handle the scenario if the connection fails (e.g., display an error message)
+//				// You may want to add UI components or handle this situation according to your requirements
+//				System.out.println("Connection failed. Please re-enter the port number.");
+//			}
+
+
 
 		});
 
 		return new Scene(pane, 500, 400);
+
 	}
 
 	
