@@ -1,7 +1,15 @@
 .my-button {
     -fx-background-color: #007bff;
     -fx-text-fill: white;
-    -fx-font-size: 14px;
+    -fx-font-size: 20px;
+    -fx-border-radius: 15px;
+}
+
+.my-button:hover{
+    -fx-background-color: #EF626C;
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-border-radius: 30px;
 }
 
 /* styles.css */
@@ -42,24 +50,37 @@
     /* Add any other styling properties you want */
 }
 
+.port-text {
+    -fx-font-size: 20px; /* Adjust the font size as needed */
+    -fx-font-family: "Comic Sans MS", cursive; /* Use a fancy font family (change to your desired font) */
+    -fx-font-weight: bold; /* Make the text bold */
+    -fx-text-stroke-width: 2px; /* Text stroke width */
+    -fx-border-width: 1px;
+    -fx-border-color: black;
+    -fx-padding: 0px;
+    /* Add any other styling properties you want */
+}
+
 .game-text{
     -fx-font-size: 20px;
     -fx-font-family: "Comic Sans MS", cursive;
     -fx-font-weight: bold; /* Make the text bold */
     -fx-text-stroke-width: 2px;
-
 }
 
 /* styles.css */
 .circle-text-field {
-    -fx-background-color: #007bff; /* Blue background color */
-    -fx-text-fill: #ffffff; /* White text color */
+    -fx-background-color: none; /* Blue background color */
+    -fx-text-fill: #000000; /* White text color */
     -fx-font-size: 20px;
     -fx-min-width: 30px; /* Set a fixed width for the circle */
     -fx-min-height: 30px; /* Set a fixed height for the circle */
-    -fx-border-radius: 20; /* Makes it circular */
+    /*-fx-border-radius: 20; !* Makes it circular *!*/
     -fx-background-radius: 15; /* Makes it circular */
     -fx-padding: 5px; /* Adjust padding as needed */
+    -fx-background-image: none;
+    -fx-border-width: 0px 0px 1px 0px;
+    -fx-border-color: black;
 }
 
 
