@@ -1,0 +1,99 @@
+.my-button {
+    -fx-background-color: #007bff;
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-border-radius: 15px;
+}
+
+.my-button:hover{
+    -fx-background-color: #EF626C;
+    -fx-text-fill: white;
+    -fx-font-size: 20px;
+    -fx-border-radius: 30px;
+}
+
+/* styles.css */
+.custom-textfield {
+    -fx-background-color: #f2f2f2; /* Background color */
+    -fx-border-color: #007bff;     /* Border color */
+    -fx-border-width: 2px;         /* Border width */
+    -fx-font-size: 14px;           /* Font size */
+    -fx-text-fill: #333333;        /* Text color */
+}
+
+/* styles.css */
+.port-label {
+    -fx-font-size: 40px; /* Set the font size to 50px */
+    -fx-font-weight: bold; /* Make the text bold */
+    -fx-font-family: "Comic Sans MS", cursive; /* Use a fancy font family (change to your desired font) */
+    -fx-fill: black; /* Set the text color to a fancy color (change to your desired color) */
+    /* Add any other styling properties you want */
+}
+
+/* styles.css */
+.round-button {
+    -fx-background-radius: 38; /* Make the button round */
+    -fx-min-width: 76px; /* Adjust the button width as needed */
+    -fx-min-height: 76px; /* Adjust the button height as needed */
+    -fx-background-color: #007bff; /* Button background color */
+    -fx-text-fill: white; /* Text color */
+    -fx-font-weight: bold; /* Make the text bold */
+    /* Add any other styling properties you want */
+}
+
+.round-button:hover{
+    -fx-background-radius: 38; /* Make the button round */
+    -fx-min-width: 76px; /* Adjust the button width as needed */
+    -fx-min-height: 76px; /* Adjust the button height as needed */
+    -fx-background-color: #EF626C; /* Button background color */
+    -fx-text-fill: white; /* Text color */
+    -fx-font-weight: bold;
+    -fx-font-size: 20px;
+}
+
+/* styles.css */
+.fancy-text {
+    -fx-font-size: 30px; /* Adjust the font size as needed */
+    -fx-font-family: "Comic Sans MS", cursive; /* Use a fancy font family (change to your desired font) */
+    -fx-font-weight: bold; /* Make the text bold */
+    -fx-text-stroke-width: 2px; /* Text stroke width */
+    /* Add any other styling properties you want */
+}
+
+.port-text {
+    -fx-font-size: 20px; /* Adjust the font size as needed */
+    -fx-font-family: "Comic Sans MS", cursive; /* Use a fancy font family (change to your desired font) */
+    -fx-font-weight: bold; /* Make the text bold */
+    -fx-text-stroke-width: 2px; /* Text stroke width */
+    -fx-border-width: 1px;
+    -fx-border-color: black;
+    -fx-padding: 0px;
+    /* Add any other styling properties you want */
+}
+
+.game-text{
+    -fx-font-size: 20px;
+    -fx-font-family: "Comic Sans MS", cursive;
+    -fx-font-weight: bold; /* Make the text bold */
+    -fx-text-stroke-width: 2px;
+}
+
+/* styles.css */
+.circle-text-field {
+    -fx-background-color: none; /* Blue background color */
+    -fx-text-fill: #000000; /* White text color */
+    -fx-font-size: 20px;
+    -fx-min-width: 30px; /* Set a fixed width for the circle */
+    -fx-min-height: 30px; /* Set a fixed height for the circle */
+    /*-fx-border-radius: 20; !* Makes it circular *!*/
+    -fx-background-radius: 15; /* Makes it circular */
+    -fx-padding: 5px; /* Adjust padding as needed */
+    -fx-background-image: none;
+    -fx-border-width: 0px 0px 2px 0px;
+    -fx-border-color: black;
+}
+
+
+
+
+
