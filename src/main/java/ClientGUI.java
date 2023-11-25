@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.SimpleTimeZone;
+import java.util.function.UnaryOperator;
+
+import javafx.geometry.Insets;
+
+import javafx.scene.control.TextFormatter;
 import javafx.scene.image.Image;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -20,6 +25,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.text.Text;
+import javafx.scene.control.TextFormatter.Change;
 
 
 public class ClientGUI extends Application{
@@ -39,7 +45,7 @@ public class ClientGUI extends Application{
 	Server serverConnection;
 	Client clientConnection;
 	ListView<String> listItems, listItems2;
-	Text category, guess;
+	Text category, guess, wrongPort;
 	int guesses = 6;
 	int counter = 0;
 	int catcounter = 0;
@@ -104,10 +110,23 @@ public class ClientGUI extends Application{
 		pane.setStyle("-fx-background-image: url('"+background.getUrl()+"');");
 		pane.setStyle("-fx-background-image: url('"+background.getUrl()+"'); -fx-background-repeat: no-repeat; -fx-background-size: cover;");
 		Text title = new Text("Enter a port number");
+		wrongPort = new Text();
+		wrongPort.getStyleClass().add("port-text");
 		title.getStyleClass().add("port-label");
 		portNumber = new TextField();
 		portNumber.setMaxWidth(150);
 		portNumber.getStyleClass().add("custom-textfield");
+		UnaryOperator<Change> filter = change -> {
+			String val = change.getText();
+			if (val.matches("[0-9]*")){
+				return change;
+			}
+
+			return null;
+		};
+
+		TextFormatter<String> textFormatter = new TextFormatter<>(filter);
+		portNumber.setTextFormatter(textFormatter);
 
 		pButton = new Button("Connect");
 		pButton.getStyleClass().add("my-button");
@@ -120,9 +139,11 @@ public class ClientGUI extends Application{
 		portBox.setAlignment(Pos.CENTER);
 
 		topBox.setAlignment(Pos.CENTER);
-		topBox.getChildren().addAll(title,portNumber);
+		topBox.getChildren().addAll(title,portNumber, wrongPort);
+		topBox.setSpacing(50);
 
 		portBox.getChildren().addAll(topBox,pButton);
+		portBox.setSpacing(40);
 
 		pane.setCenter(portBox);
 
@@ -201,9 +222,15 @@ public class ClientGUI extends Application{
 							for (int x = 0; x < Integer.valueOf(data.toString()); x++){
 								TextField letters = new TextField();
 								letters.getStyleClass().add("circle-text-field");
+
+
 								wordd.add(letters);
 								wordspaces.getChildren().add(wordd.get(x));
+
 							}
+							Insets insets = new Insets(20, 0, 20, 0); // You can adjust the margin size as needed
+							wordspaces.setPadding(insets);
+							wordspaces.setSpacing(50);
 							playingpane.setBottom(wordspaces);
 						}
 
@@ -223,7 +250,7 @@ public class ClientGUI extends Application{
 					primaryStage.setTitle("Client");
 				}
 				else{
-
+					wrongPort.setText("Connection failed. Please re-enter the port number.");
 				}
 
 			} catch (Exception e){
@@ -232,7 +259,7 @@ public class ClientGUI extends Application{
 				}
 		});
 
-		return new Scene(pane, 500, 400);
+		return new Scene(pane, 600, 500);
 
 	}
 
@@ -290,7 +317,7 @@ public class ClientGUI extends Application{
 		playingpane = new BorderPane();
 		playingpane.setStyle("-fx-background-image: url('"+background.getUrl()+"');");
 		playingpane.setStyle("-fx-background-image: url('"+background.getUrl()+"'); -fx-background-repeat: no-repeat; -fx-background-size: cover;");
-		Text title = new Text("Guess the word!");
+		Text title = new Text("Hangman");
 		category = new Text("Category: ");
 		guess = new Text("Guesses: " + guesses);
 		title.getStyleClass().add("game-text");
@@ -299,6 +326,8 @@ public class ClientGUI extends Application{
 		Text input = new Text("Enter a character:");
 		input.getStyleClass().add("game-text");
 		TextField inputText = new TextField();
+
+		inputText.setMaxWidth(30);
 		inputText.getStyleClass().add("circle-text-field");
 		Button letterButton = new Button("Enter");
 		letterButton.getStyleClass().add("my-button");
