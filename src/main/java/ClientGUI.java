@@ -67,11 +67,6 @@ public class ClientGUI extends Application{
 	Image background = new Image("background.jpg");
 
 
-
-
-
-
-
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		launch(args);
@@ -89,6 +84,7 @@ public class ClientGUI extends Application{
 		sceneMap.put("ClientPage", createClientGui());
 		sceneMap.put("PlayingPage", playingGUI());
 		sceneMap.put("WinLosePage", WinLoseGUI());
+		sceneMap.put("RulesPage", RulesPageGUI());
 
 		String css;
 
@@ -98,6 +94,7 @@ public class ClientGUI extends Application{
 		sceneMap.get("ClientPage").getStylesheets().add(css);
 		sceneMap.get("PlayingPage").getStylesheets().add(css);
 		sceneMap.get("WinLosePage").getStylesheets().add(css);
+		sceneMap.get("RulesPage").getStylesheets().add(css);
 
 
 		primaryStage.setScene(sceneMap.get("LandingPage"));
@@ -246,8 +243,8 @@ public class ClientGUI extends Application{
 				System.out.println(clientConnection.isConnected());
 
 				if (clientConnection.isConnected()){
-					primaryStage.setScene(sceneMap.get("ClientPage"));
-					primaryStage.setTitle("Client");
+					primaryStage.setScene(sceneMap.get("RulesPage"));
+					primaryStage.setTitle("Rules");
 				}
 				else{
 					wrongPort.setText("Connection failed. Please re-enter the port number.");
@@ -389,6 +386,42 @@ public class ClientGUI extends Application{
 
 		return new Scene(pane,500,400);
 	}
+
+	public Scene RulesPageGUI(){
+		BorderPane pane = new BorderPane();
+		pane.setStyle("-fx-background-image: url('"+background.getUrl()+"');");
+		pane.setStyle("-fx-background-image: url('"+background.getUrl()+"'); -fx-background-repeat: no-repeat; -fx-background-size: cover;");
+		Text title = new Text("RULES");
+		Text rules = new Text("You must guess 3 different words in 3 different categories to\n" +
+				"win Get to guess a total of 6 letters, one at a time. Correct\n" +
+				"guesses do not count towards the six guess total. If you guess \n" +
+				"the word within 6 letter guesses, you can not guess at another\n" +
+				"word in the same category but must chose from the two remaining.\n " +
+				"If you do not guess the word correctly, you are free to choose \n" +
+				"from any of the three categories for another word. You may guess\n" +
+				" at a maximum of three words per category. If you do not make a \n" +
+				"correct guess within three attempts, the game is over. The game is \n" +
+				"won when you successfully guess one word in each category. When the\n" +
+				" game is over, you can either play again or quit.  ");
+		rules.setStyle("-fx-font-size: 13");
+		title.getStyleClass().add("fancy-text");
+		rules.getStyleClass().add("game-text");
+		Button contin = new Button("Continue");
+		contin.getStyleClass().add("my-button");
+		VBox content = new VBox(10);
+		content.setAlignment(Pos.CENTER);
+		content.getChildren().addAll(title,rules,contin);
+
+		contin.setOnAction(event -> {
+			primaryStage.setScene(sceneMap.get("ClientPage"));
+			primaryStage.setTitle("Client Page");
+		});
+
+		pane.setCenter(content);
+
+		return new Scene(pane, 500,400);
+	}
+
 
 
 }
