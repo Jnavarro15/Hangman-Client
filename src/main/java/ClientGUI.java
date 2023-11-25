@@ -116,6 +116,7 @@ public class ClientGUI extends Application{
 		portNumber = new TextField();
 		portNumber.setMaxWidth(150);
 		portNumber.getStyleClass().add("custom-textfield");
+
 		UnaryOperator<Change> filter = change -> {
 			String val = change.getText();
 			if (val.matches("[0-9]*")){
@@ -222,7 +223,9 @@ public class ClientGUI extends Application{
 							for (int x = 0; x < Integer.valueOf(data.toString()); x++){
 								TextField letters = new TextField();
 								letters.getStyleClass().add("circle-text-field");
-
+								letters.setEditable(false);
+								letters.setStyle("-fx-alignment: center;");
+								letters.setStyle("-fx-font-size: 20px");
 
 								wordd.add(letters);
 								wordspaces.getChildren().add(wordd.get(x));
