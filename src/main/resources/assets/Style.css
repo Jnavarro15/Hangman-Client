@@ -41,6 +41,16 @@
     /* Add any other styling properties you want */
 }
 
+.round-button:hover{
+    -fx-background-radius: 38; /* Make the button round */
+    -fx-min-width: 76px; /* Adjust the button width as needed */
+    -fx-min-height: 76px; /* Adjust the button height as needed */
+    -fx-background-color: #EF626C; /* Button background color */
+    -fx-text-fill: white; /* Text color */
+    -fx-font-weight: bold;
+    -fx-font-size: 20px;
+}
+
 /* styles.css */
 .fancy-text {
     -fx-font-size: 30px; /* Adjust the font size as needed */

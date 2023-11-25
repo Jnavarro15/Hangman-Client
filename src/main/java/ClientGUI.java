@@ -222,15 +222,17 @@ public class ClientGUI extends Application{
 								letters.getStyleClass().add("circle-text-field");
 								letters.setEditable(false);
 								letters.setStyle("-fx-alignment: center;");
-								letters.setStyle("-fx-font-size: 20px");
+//								letters.setStyle("-fx-font-size: 20px");
+								letters.setMaxWidth(50);
+								letters.setAlignment(Pos.CENTER);
 
 								wordd.add(letters);
 								wordspaces.getChildren().add(wordd.get(x));
 
 							}
-							Insets insets = new Insets(20, 0, 20, 0); // You can adjust the margin size as needed
+							Insets insets = new Insets(20, 20, 20, 0); // You can adjust the margin size as needed
 							wordspaces.setPadding(insets);
-							wordspaces.setSpacing(50);
+							wordspaces.setSpacing(20);
 							playingpane.setBottom(wordspaces);
 						}
 
@@ -331,6 +333,8 @@ public class ClientGUI extends Application{
 		inputText.getStyleClass().add("circle-text-field");
 		Button letterButton = new Button("Enter");
 		letterButton.getStyleClass().add("my-button");
+
+
 
 
 		inputBox = new HBox(15);
