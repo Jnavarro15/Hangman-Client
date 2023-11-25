@@ -79,7 +79,7 @@
     -fx-background-radius: 15; /* Makes it circular */
     -fx-padding: 5px; /* Adjust padding as needed */
     -fx-background-image: none;
-    -fx-border-width: 0px 0px 1px 0px;
+    -fx-border-width: 0px 0px 2px 0px;
     -fx-border-color: black;
 }
 
